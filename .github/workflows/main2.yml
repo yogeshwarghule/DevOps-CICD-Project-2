@@ -44,7 +44,9 @@ jobs:
       with:
         task-definition: task-definition.json
         container-name: web1
+        image: 900765026163.dkr.ecr.ap-south-1.amazonaws.com/new_ecr_repo:latest
         image: ${{ steps.build-image.outputs.image }}
+        
 
     - name: Deploy Amazon ECS task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
