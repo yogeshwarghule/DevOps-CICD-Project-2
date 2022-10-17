@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Testing Github Actions And Bitbucket Pipelines With React Signiance M jdbjahjhjh </h1>
+        <h1> Signiance Technologies  </h1>
         <a
           className="App-link"
           href="https://reactjs.org"
