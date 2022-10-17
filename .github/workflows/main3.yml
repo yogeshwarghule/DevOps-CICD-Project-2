@@ -47,3 +47,9 @@ jobs:
         image: 900765026163.dkr.ecr.ap-south-1.amazonaws.com/new_ecr_repo:latest
         environment-variables: "LOG_LEVEL=info"
 
+    - name: Deploy to Amazon ECS service
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+        service: service1
+        cluster: yogeshwar
