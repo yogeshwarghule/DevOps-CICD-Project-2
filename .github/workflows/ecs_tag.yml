@@ -37,7 +37,7 @@ jobs:
     - name: Download task definition
       run: |
         aws ecs describe-task-definition --task-definition react_task_defi --query taskDefinition > task-definition.json     
-        
+        echo "${{ steps.build-image.outputs.image }}"
         
     - name: Render Amazon ECS task definition
       id: render-web-container
