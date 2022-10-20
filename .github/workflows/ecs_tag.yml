@@ -44,18 +44,11 @@ jobs:
         echo $TASK_DEFINITION | jq '.containerDefinitions[0].image='\"${NEW_ECR_IMAGE}\" > task-definition.json
         
         
-    - name: Render Amazon ECS task definition
-      id: render-web-container
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with: 
-        task-definition: $TASK_DEFINITION
-        container-name: ${{ secrets.CONTAINER_NAME }}
-        image: "900765026163.dkr.ecr.ap-south-1.amazonaws.com/new_ecr_repo:${{ github.sha }}"
       
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+        task-definition: ${{ steps.build-image.outputs.task-definition }}
         service: ${{ secrets.ECS_SERVICE }}
         cluster: ${{ secrets.ECS_CLUSTER }}
