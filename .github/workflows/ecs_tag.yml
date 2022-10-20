@@ -35,6 +35,7 @@ jobs:
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
         
     - name: Download task definition
+      id: build-image
       run: |
         TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition react_task_defi)
         echo $TASK_DEFINITION
@@ -42,19 +43,10 @@ jobs:
         echo $NEW_ECR_IMAGE
         echo $TASK_DEFINITION | jq '.containerDefinitions[0].image='\"${NEW_ECR_IMAGE}\" > task-definition.json
         
-        
-    - name: Render Amazon ECS task definition
-      id: render-web-container
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-        task-definition: task-definition.json
-        container-name: ${{ secrets.CONTAINER_NAME }}
-        image: ${{ steps.build-image.outputs.image }}
-      
 
     - name: Deploy to Amazon ECS service
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
-        task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+        task-definition: task-definition.json
         service: ${{ secrets.ECS_SERVICE }}
         cluster: ${{ secrets.ECS_CLUSTER }}
