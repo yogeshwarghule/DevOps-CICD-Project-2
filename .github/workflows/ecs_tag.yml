@@ -48,7 +48,7 @@ jobs:
       id: render-web-container
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with: 
-        task-definition: task-definition.json
+        task-definition: $TASK_DEFINITION
         container-name: ${{ secrets.CONTAINER_NAME }}
         image: "900765026163.dkr.ecr.ap-south-1.amazonaws.com/new_ecr_repo:${{ github.sha }}"
       
