@@ -36,9 +36,10 @@ jobs:
         
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition react_task_defi --query taskDefinition > task-definition.json
         TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition react_task_defi)
+        echo $TASK_DEFINITION
         NEW_ECR_IMAGE="900765026163.dkr.ecr.ap-south-1.amazonaws.com/new_ecr_repo:${{ github.sha }}"
+        echo $NEW_ECR_IMAGE
         echo $TASK_DEFINITION | jq '.containerDefinitions[0].image='\"${NEW_ECR_IMAGE}\" > task-definition.json
         
         
