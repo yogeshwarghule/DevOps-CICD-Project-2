@@ -42,8 +42,6 @@ jobs:
         NEW_ECR_IMAGE="900765026163.dkr.ecr.ap-south-1.amazonaws.com/new_ecr_repo:${{ github.sha }}"
         echo $NEW_ECR_IMAGE
         echo $TASK_DEFINITION | jq '.containerDefinitions[0].image='\"${NEW_ECR_IMAGE}\" > task-definition.json
-        cat task-definition.json
-        
         
       
 
