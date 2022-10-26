@@ -1,4 +1,4 @@
-name: FINAL
+name: ECS_Deployment_SHA_Tag
 
 on:
   push:
