@@ -1,4 +1,4 @@
-name: Docker Image CI/CD NEW REACT 2022
+name: ECS_Deployment_Latest_Tag
 on:
   push:
     branches: [ main ]
